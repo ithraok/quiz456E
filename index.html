@@ -1,10 +1,9 @@
 
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>اختبارات تفاعلية تعليمية - نسخة معلم المواد الأخرى</title>
+<html dir="rtl" lang="ar"><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>اختبارات تفاعلية تعليمية - نسخة الطالب (أرقام عربية)</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap');
 
@@ -547,80 +546,21 @@ footer {
 
 </head>
 <body>
-    <button class="config-btn" onclick="toggleConfigPanel()">⚙️</button>
+    
     <div class="container">
         <div class="header">
-            <h1 id="quizTitle">كويز الثقافة العامة 🇸🇦</h1>
+            <h1 id="quizTitle">مراجعة تفاعلية لمادة اللغة الإنجليزية – الفصل الدراسي الثالث محاكاة للأسئلةالمركزية للصف السادس المراجعة العلمية: الأستاذ/ ماجد سعيد المالكي والأستاذ/ أحمد عبدالعزيز الشهري</h1>
             <p id="instructions">اختر الإجابة الصحيحة لكل سؤال قبل انتهاء الوقت</p>
         </div>
-<div class="buttons-container">
-    <button class="action-btn" id="loadButton" onclick="loadQuestionsFromFile()">تحميل الأسئلة</button>
-    <button class="action-btn settings-btn" id="settingsBtn" onclick="toggleSettingsPanel()">إعدادات العرض</button>
-    <button class="action-btn" id="editButton" onclick="toggleEditMode()">تحرير السؤال</button>
-</div>
-<div class="settings-panel" id="editPanel" style="display: none;">
-    <div class="settings-title">تحرير السؤال</div>
-    <div class="settings-option">
-        <label for="editReadingText">النص القرائي:</label>
-        <textarea id="editReadingText" class="form-control" rows="5"></textarea>
-        <label for="editReadingImage">صورة النص القرائي:</label>
-        <input type="file" id="editReadingImage" accept="image/*" />
-        <img id="readingImagePreview" style="display: none; max-width: 100%; max-height: 150px; margin: 10px 0;" />
-    </div>
-    <div class="settings-option">
-        <label for="editQuestionText">السؤال:</label>
-        <input type="text" id="editQuestionText" class="form-control" />
-        <label for="editQuestionImage">صورة السؤال:</label>
-        <input type="file" id="editQuestionImage" accept="image/*" />
-        <img id="questionImagePreview" style="display: none; max-width: 100%; max-height: 150px; margin: 10px 0;" />
-    </div>
-    <div class="settings-option">
-        <label>الخيارات:</label>
-        <div style="display: grid; gap: 10px;">
-            <div>
-                <input type="checkbox" id="correct1" />
-                <label for="editOption1">خيار 1:</label>
-                <input type="text" id="editOption1" class="form-control" />
-                <input type="file" id="editOptionImage1" accept="image/*" />
-                <img id="optionImagePreview1" style="display: none; max-width: 100%; max-height: 100px; margin: 10px 0;" />
-            </div>
-            <div>
-                <input type="checkbox" id="correct2" />
-                <label for="editOption2">خيار 2:</label>
-                <input type="text" id="editOption2" class="form-control" />
-                <input type="file" id="editOptionImage2" accept="image/*" />
-                <img id="optionImagePreview2" style="display: none; max-width: 100%; max-height: 100px; margin: 10px 0;" />
-            </div>
-            <div>
-                <input type="checkbox" id="correct3" />
-                <label for="editOption3">خيار 3:</label>
-                <input type="text" id="editOption3" class="form-control" />
-                <input type="file" id="editOptionImage3" accept="image/*" />
-                <img id="optionImagePreview3" style="display: none; max-width: 100%; max-height: 100px; margin: 10px 0;" />
-            </div>
-            <div>
-                <input type="checkbox" id="correct4" />
-                <label for="editOption4">خيار 4:</label>
-                <input type="text" id="editOption4" class="form-control" />
-                <input type="file" id="editOptionImage4" accept="image/*" />
-                <img id="optionImagePreview4" style="display: none; max-width: 100%; max-height: 100px; margin: 10px 0;" />
-            </div>
-        </div>
-    </div>
-    <div class="settings-footer" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
-        <button class="nav-btn" onclick="saveEdit()" style="background: #28a745;">حفظ</button>
-        <button class="nav-btn" onclick="addNewQuestion()" style="background: #007bff;">إضافة سؤال</button>
-        <button class="nav-btn" onclick="deleteCurrentQuestion()" style="background: #dc3545;">حذف السؤال</button>
-        <button class="nav-btn" onclick="cancelEdit()">إلغاء</button>
-    </div>
-</div>
-        <div class="settings-panel" id="settingsPanel">
+
+
+        <div class="settings-panel" id="settingsPanel" style="display: none;">
             <div class="settings-title">إعدادات العرض</div>
             <div class="settings-option">
                 <label for="numeralType">نوع الأرقام:</label>
                 <select id="numeralType" onchange="changeNumeralType()">
                     <option value="arabic">أرقام عربية (1, 2, 3)</option>
-                    <option selected value="eastern">أرقام هندية شرق أوسطية (١, ٢, ٣)</option>
+                    <option selected="" value="eastern">أرقام هندية شرق أوسطية (١, ٢, ٣)</option>
                 </select>
             </div>
             <div class="settings-option">
@@ -630,52 +570,36 @@ footer {
             </div>
             <div class="settings-option">
                 <label for="questionTime">وقت السؤال (بالثواني):</label>
-                <input id="questionTime" max="120" min="5" onchange="changeQuestionTime()" type="number" value="30" />
+                <input id="questionTime" max="120" min="5" onchange="changeQuestionTime()" type="number" value="30">
             </div>
             <div class="settings-footer">
                 <button class="nav-btn" onclick="toggleSettingsPanel()">حفظ وإغلاق</button>
             </div>
         </div>
-        <div class="counters" id="countersBox">
-            <div id="questionCounter">📌 السؤال ٠ من ٠</div>
-            <div id="timer">⏳ الوقت المتبقي: ٠ ثانية</div>
-            <div id="scoreCounter">🏆 الدرجات: ٠ من ٠</div>
+        <div class="counters" id="countersBox" style="display: flex;">
+            <div id="questionCounter">السؤال 5 من 49</div>
+            <div id="timer">الوقت المتبقي: 16 ثانية</div>
+            <div id="scoreCounter">الدرجات: 0 من 49</div>
         </div>
-        <div class="reading-text" id="readingText"></div>
-        <div class="quiz-box">
-            <div class="question" id="question"></div>
-            <div class="options" id="options"></div>
+        <div class="reading-text" id="readingText" style="display: block;"><div class="reading-text-content" style="font-size: 18px;">مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ</div></div>
+        <div class="quiz-box" style="display: block;">
+            <div class="question" id="question"><div class="question-content"><div class="question-text" style="font-size: 20px;">I. Reading Short Sentences:Choose the correct answer:</div></div></div>
+            <div class="options" id="options"><div class="option" data-original-index="0"><div class="option-content"><span class="option-text" style="font-size: 18px;">He stayed at home</span></div></div><div class="option" data-original-index="1"><div class="option-content"><span class="option-text" style="font-size: 18px;">He played computer games</span></div></div><div class="option" data-original-index="2"><div class="option-content"><span class="option-text" style="font-size: 18px;">He cleaned the room</span></div></div><div class="option" data-original-index="3"><div class="option-content"><span class="option-text" style="font-size: 18px;">He practiced on the trampoline</span></div></div></div>
             <div class="controls">
-                <button class="nav-btn" disabled id="prevBtn" onclick="previousQuestion()">السابق</button>
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">السابق</button>
                 <button class="nav-btn pause-btn" id="pauseBtn" onclick="togglePause()">توقف</button>
-                <button class="nav-btn" disabled id="nextBtn" onclick="nextQuestion()">التالي</button>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">التالي</button>
             </div>
             <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+                <div class="progress" id="progress" style="width: 8.16327%;"></div>
             </div>
         </div>
     </div>
-    <div class="score-board" id="scoreBoard">
-        <h2>نتيجتك النهائية: <span id="totalQuestions">٠</span>/<span id="finalScore">٠</span></h2>
+    <div class="score-board" id="scoreBoard" style="display: none;">
+        <h2>نتيجتك النهائية: <span id="totalQuestions">٤٩</span>/<span id="finalScore">٠</span></h2>
         <button class="restart-btn" onclick="restartQuiz()">إعادة المحاولة</button>
     </div>
-    <div class="config-panel" id="configPanel">
-        <h3>لوحة التحكم</h3>
-        <label for="titleInput">عنوان الكويز:</label>
-        <input class="form-control" id="titleInput" type="text" />
-        <label for="instructionsInput" class="form-group">التوجيهات:</label>
-        <textarea class="form-control" id="instructionsInput" rows="5"></textarea>
-        <div class="form-group">
-            <label for="footerInput">التذييل:</label>
-            <textarea class="form-control" id="footerInput" rows="3">
-إعداد وتصميم / ملتقى معلمي ومعلمات المواد الأخرى ـ المملكة العربية السعودية
-            </textarea>
-        </div>
-        <div class="config-buttons">
-            <button class="nav-btn" onclick="saveConfig()">حفظ التعديلات</button>
-            <button class="nav-btn" onclick="toggleConfigPanel()">إلغاء</button>
-        </div>
-    </div>
+    
     <script>
         const state = {
             questions: [],
@@ -1069,24 +993,7 @@ footer {
 const customQuestions = ${currentQuestionsJSON};
 state.numeralType = "${state.numeralType}"; // حفظ إعداد نوع الأرقام
 // تهيئة التطبيق عند تحميل الصفحة
-window.onload = function() {
-    // إخفاء النص القرائي عند فتح الصفحة
-    const readingText = document.getElementById('readingText');
-    if (readingText) {
-        readingText.style.display = 'none';
-    }
-    
-    // تعيين الأسئلة المخصصة
-    state.questions = customQuestions;
-    
-    // تحديث العدادات الأولية
-    document.getElementById('questionCounter').innerHTML = \`السؤال \${convertToSelectedNumerals(1)} من \${convertToSelectedNumerals(state.questions.length)}\`;
-    document.getElementById('timer').innerHTML = \`الوقت المتبقي: \${convertToSelectedNumerals(state.timeLeft)} ثانية\`;
-    document.getElementById('scoreCounter').innerHTML = \`الدرجات: \${convertToSelectedNumerals(0)} من \${convertToSelectedNumerals(state.questions.length)}\`;
-    
-    // بدء الاختبار مباشرة
-    init();
-};`;
+`;
 
                     // إنشاء عنصر script جديد للطالب
                     const studentScript = doc.createElement('script');
@@ -1442,31 +1349,32 @@ function deleteCurrentQuestion() {
         showQuestion();
     }
 }
-    </script>
+    </script><script>
+// إضافة الأسئلة المخصصة مباشرة
+const customQuestions = [{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي // شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"It is a school bus","image":null},{"text":"It is a taxi","image":null},{"text":"It is a train","image":null},{"text":"It is a car","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"She had a cat","image":null},{"text":"She had a bag","image":null},{"text":"She had a lamb","image":null},{"text":"She had a rabbit","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"I have a stomachache","image":null},{"text":"I have a headache","image":null},{"text":"I have an earache","image":null},{"text":"I have a sore throat","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"It is a post office","image":null},{"text":"It is a convenience store","image":null},{"text":"It is a police station","image":null},{"text":"It is a supermarket","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"He stayed at home","image":null},{"text":"He played computer games","image":null},{"text":"He cleaned the room","image":null},{"text":"He practiced on the trampoline","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"a. There is a (Don’t Litter sign) here.","image":null},{"text":"They have to put a (Stop) sign","image":null},{"text":"There is a (No Smoking) sign in the hotel","image":null},{"text":"There is a (No Parking) sign in the street.","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"He likes golf","image":null},{"text":"He likes tennis","image":null},{"text":"He likes diving","image":null},{"text":"He likes football","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences://Choose the correct answer:","image":null},"options":[{"text":"I'd like to play volleyball","image":null},{"text":"I'd like some juice","image":null},{"text":"I’d like some bread","image":null},{"text":"I'd like to thank you","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Last week, we …………….to Najran.","image":null},"options":[{"text":"go","image":null},{"text":"went","image":null},{"text":"goes","image":null},{"text":"are going","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// You should ……………. a lot of water.","image":null},"options":[{"text":"drink","image":null},{"text":"drinks","image":null},{"text":"drank","image":null},{"text":"are drinking","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://……………. students are there in your school?","image":null},"options":[{"text":"How much","image":null},{"text":"How long","image":null},{"text":"How many","image":null},{"text":"How old","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Last year, I ……………. History.","image":null},"options":[{"text":"have liked","image":null},{"text":"like","image":null},{"text":"likes","image":null},{"text":"liked","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// There ……………. flowers in the garden now.","image":null},"options":[{"text":"am","image":null},{"text":"are","image":null},{"text":"is","image":null},{"text":"were","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// I didn’t ……………. dinner this evening.","image":null},"options":[{"text":"eat","image":null},{"text":"ate","image":null},{"text":"eats","image":null},{"text":"am eating","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// ……………. you have lunch at your school every day?","image":null},"options":[{"text":"Did","image":null},{"text":"Do","image":null},{"text":"Does","image":null},{"text":"Doesn’t","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// There ……………. a book on the table yesterday.","image":null},"options":[{"text":"was","image":null},{"text":"are","image":null},{"text":"is","image":null},{"text":"were","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// We are going to ……………. Abha in Asir.","image":null},"options":[{"text":"visits","image":null},{"text":"visit","image":null},{"text":"visited","image":null},{"text":"is visiting","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Why did she eat all the soup? ………..…. she was hungry.","image":null},"options":[{"text":"Or","image":null},{"text":"And","image":null},{"text":"But","image":null},{"text":"Because","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://This is a ………..….","image":null},"options":[{"text":"cell phone","image":null},{"text":"TV","image":null},{"text":"computer","image":null},{"text":"house","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://Riyadh is a ………..…. n Saudi Arabia.","image":null},"options":[{"text":"country","image":null},{"text":"continent","image":null},{"text":"city","image":null},{"text":"house","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://Don’t ………..…. Speak clearly.","image":null},"options":[{"text":"draw","image":null},{"text":"shout","image":null},{"text":"write","image":null},{"text":"skip","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://He is wearing jeans and a ………...…...","image":null},"options":[{"text":"cap","image":null},{"text":"belt","image":null},{"text":"T-shirt","image":null},{"text":"jacket","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer:// She is good at ………...…...","image":null},"options":[{"text":"Math","image":null},{"text":"Social Studies","image":null},{"text":"PE","image":null},{"text":"Science","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://The ………...…... is far from here.","image":null},"options":[{"text":"coffee shop","image":null},{"text":"butcher","image":null},{"text":"train station","image":null},{"text":"bus stop","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://A ………...…... is a store to sell pens and pencils.","image":null},"options":[{"text":"DVD store","image":null},{"text":"candy store","image":null},{"text":"flower store","image":null},{"text":"stationary","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://A teacher works at a……………...…...","image":null},"options":[{"text":"school","image":null},{"text":"bank","image":null},{"text":"mall","image":null},{"text":"hospital","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://I'm starting to get a ……………...…...","image":null},"options":[{"text":"toothache","image":null},{"text":"headache","image":null},{"text":"cold","image":null},{"text":"fever","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://August is a ……………...…...","image":null},"options":[{"text":"year","image":null},{"text":"season","image":null},{"text":"month","image":null},{"text":"day","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://You must come early to class.//The opposite of early is ……………...…...","image":null},"options":[{"text":"late","image":null},{"text":"wealthy","image":null},{"text":"right","image":null},{"text":"happy","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://The laptop has a big screen.//The opposite of big is ……………...…...","image":null},"options":[{"text":"strong","image":null},{"text":"small","image":null},{"text":"up","image":null},{"text":"right","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://I want a st_pler.","image":null},"options":[{"text":"( i )","image":null},{"text":"( o )","image":null},{"text":"( u )","image":null},{"text":"( a )","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://It is a _ _arf.","image":null},"options":[{"text":"( sq )","image":null},{"text":"( sk )","image":null},{"text":"( sc )","image":null},{"text":"( sn )","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://It is a _ _arf.","image":null},"options":[{"text":"( ai )","image":null},{"text":"( ue )","image":null},{"text":"( ea )","image":null},{"text":"( oy )","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://He goes rock cl_mbing.","image":null},"options":[{"text":"( e )","image":null},{"text":"( a )","image":null},{"text":"( i )","image":null},{"text":"( o )","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://I saw a bi_d.","image":null},"options":[{"text":"( r )","image":null},{"text":"( m )","image":null},{"text":"( h )","image":null},{"text":"( v )","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://The b _ _ ger is delicious.","image":null},"options":[{"text":"( ow )","image":null},{"text":"( ur )","image":null},{"text":"( ar )","image":null},{"text":"( er )","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://The g_obe is round.","image":null},"options":[{"text":"( l )","image":null},{"text":"( k )","image":null},{"text":"( r )","image":null},{"text":"( f )","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter:// I have a d_ll.","image":null},"options":[{"text":"( u )","image":null},{"text":"( i )","image":null},{"text":"( a )","image":null},{"text":"(o )","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Who works in a hospital","image":null},"options":[{"text":"A student","image":null},{"text":"A doctor","image":null},{"text":"A baker","image":null},{"text":"An engineer","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Where is Burj Khalifa","image":null},"options":[{"text":"In Egypt","image":null},{"text":"In Saudi Arabia","image":null},{"text":"In Dubai","image":null},{"text":"In London","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What can we buy from a bakery","image":null},"options":[{"text":"Milk","image":null},{"text":"Rice","image":null},{"text":"Bread","image":null},{"text":"Books","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What is the first day of the week","image":null},"options":[{"text":"Friday","image":null},{"text":"Saturday","image":null},{"text":"Sunday Monday","image":null},{"text":"Monday","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //When do people eat breakfast","image":null},"options":[{"text":"At night","image":null},{"text":"In the morning","image":null},{"text":"In the afternoon","image":null},{"text":"Before dinner","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What do students do in a library","image":null},"options":[{"text":"They sleep","image":null},{"text":"They read books","image":null},{"text":"They buy food","image":null},{"text":"They watch TV","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //How much is the sweater","image":null},"options":[{"text":"It is 30 SAR","image":null},{"text":"It is 40 SAR","image":null},{"text":"It is 50 SAR","image":null},{"text":"It is 60 SAR","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Is she a girl","image":null},"options":[{"text":"No, she isn't","image":null},{"text":"Yes, he is","image":null},{"text":"Yes, she is","image":null},{"text":"No, he isn't","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//make / my / bed","image":null},"options":[{"text":"Mybed //make i//","image":null},{"text":"Make iMy//bed //","image":null},{"text":"I bedMy//make//","image":null},{"text":"MakeI My//bed //","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//children / The / games / played","image":null},"options":[{"text":"Games the //children //played//","image":null},{"text":"The played//Games //children //","image":null},{"text":"the children //played//Games //","image":null},{"text":"playedthe //children //Games //","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//uniform / a / wears / Faisal","image":null},"options":[{"text":"Wears Faisal //a//uniform //","image":null},{"text":"Faisal Wears//a//uniform//","image":null},{"text":"a uniform//Wears//Faisal//","image":null},{"text":"uniform Wears//Faisal//a//","image":null}],"correct":1}];
+state.numeralType = "arabic"; // حفظ إعداد نوع الأرقام
+// تهيئة التطبيق عند تحميل الصفحة
+window.onload = function() {
+    // إخفاء النص القرائي عند فتح الصفحة
+    const readingText = document.getElementById('readingText');
+    if (readingText) {
+        readingText.style.display = 'none';
+    }
+    
+    // تعيين الأسئلة المخصصة
+    state.questions = customQuestions;
+    
+    // تحديث العدادات الأولية
+    document.getElementById('questionCounter').innerHTML = `السؤال ${convertToSelectedNumerals(1)} من ${convertToSelectedNumerals(state.questions.length)}`;
+    document.getElementById('timer').innerHTML = `الوقت المتبقي: ${convertToSelectedNumerals(state.timeLeft)} ثانية`;
+    document.getElementById('scoreCounter').innerHTML = `الدرجات: ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(state.questions.length)}`;
+    
+    // بدء الاختبار مباشرة
+    init();
+};</script>
 
-<div id="fontControlPanel" style="padding: 10px; background: #f9f9f9; border: 1px solid #ccc; margin-bottom: 15px; color: #222;">
-  <strong style="display: block; margin-bottom: 10px;">🔧 لوحة التحكم في حجم النصوص:</strong>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
-    <label style="flex: 1;">
-      النص القرائي:
-      <input type="range" min="12" max="36" value="18" id="readingFontSize" onchange="updateFontSizes()"> px
-    </label>
 
-    <label style="flex: 1;">
-      السؤال:
-      <input type="range" min="12" max="36" value="20" id="questionFontSize" onchange="updateFontSizes()"> px
-    </label>
-
-    <label style="flex: 1;">
-      الخيارات:
-      <input type="range" min="12" max="36" value="18" id="optionFontSize" onchange="updateFontSizes()"> px
-    </label>
-  </div>
-</div>
-
-    <footer id="quizFooter">
-        إعداد وتصميم / ملتقى معلمي ومعلمات المواد الأخرى ـ المملكة العربية السعودية
-    </footer>
-    </body>
-</html>
+    <footer id="quizFooter">إعداد وتصميم: معلم المهارات الرقمية| عبدالله بن رشيد الدريبي مدرسة غرناطة الابتدائية - العام الدراسي 1446هـ ، للتواصل: https://x.com/AbuRasheed12 ، t237265@rb.moe.gov.sa            </footer>
+    
+</body></html>
