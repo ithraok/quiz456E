@@ -1,0 +1,1388 @@
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar"><head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>اختبارات تفاعلية تعليمية - نسخة الطالب (أرقام عربية)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', 'Noto Sans Arabic', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+body {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  color: white;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.quiz-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: #333;
+  position: relative;
+}
+
+.question {
+  font-size: 1.4em;
+  margin-bottom: 25px;
+  font-weight: 700;
+  line-height: 1.4;
+    direction: ltr;
+  text-align: left;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  gap: 15px;
+}
+
+.options-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .options-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.option {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  width: 100%;
+  min-height: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option:hover {
+  transform: translateX(10px);
+  background: #e9ecef;
+}
+
+.option.correct {
+  background: #28a745 !important;
+  color: white !important;
+}
+
+.option.wrong {
+  background: #dc3545 !important;
+  color: white !important;
+}
+
+/* صورة السؤال */
+.question-image {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  margin: 15px auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* صورة النص التلقائي */
+.reading-text-image {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+  margin: 15px auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* صورة الخيار */
+.option-content img {
+  max-width: 65%;
+  max-height: 65%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.nav-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.pause-btn {
+  background: #ffc107;
+  color: black;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #dee2e6;
+  border-radius: 4px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #4CAF50;
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+.score-board {
+  text-align: center;
+  font-size: 1.5em;
+  display: none;
+}
+
+.restart-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.reading-text {
+  background: rgba(255, 255, 255, 0.85);
+  color: #1e3c72;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  line-height: 1.7;
+  font-weight: 500;
+    direction: ltr;
+  text-align: center;
+}
+
+.config-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.counters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -15px 0 25px 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  font-weight: 500;
+  color: #2a5298;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1.1em;
+  gap: 10px;
+}
+
+#timer {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+#questionCounter::before {
+  content: "📌 ";
+  margin-left: 5px;
+}
+
+#scoreCounter::before {
+  content: "🏆 ";
+  margin-left: 5px;
+}
+
+#timer::before {
+  content: "⏳";
+  font-size: 1.3em;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+#scoreBoard h2 {
+  direction: ltr;
+  display: inline-block;
+}
+
+.question-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.question-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.option-text {
+  text-align: left;
+  padding: 5px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.math-container {
+  display: inline-block;
+  margin: 5px 0;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+}
+
+.katex-display {
+  margin: 0.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 5px;
+}
+
+.option .katex {
+  font-size: 2em;
+}
+
+.option .katex-display {
+  margin: 0;
+}
+
+.question .katex {
+  font-size: 1.3em;
+}
+
+/* أزرار */
+.action-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px 5px;
+  display: inline-block;
+  font-size: 1em;
+}
+
+.action-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.action-btn.sample {
+  background: #28a745;
+}
+
+.action-btn.sample:hover {
+  background: #218838;
+}
+
+.action-btn.settings-btn {
+  background: #6c757d;
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .buttons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 10px;
+  }
+}
+
+/* إعدادات العرض */
+.settings-panel {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #333;
+  border: 1px solid #ccc;
+  margin-top: 15px;
+  max-width: 600px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.settings-title {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.settings-option {
+  margin-bottom: 10px;
+}
+
+.settings-option label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.settings-option select,
+.settings-option input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.config-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: none;
+    color: #333;
+    z-index: 9999;
+    width: 90%;
+    max-width: 500px;
+}
+
+.config-panel h3 {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 98%;
+  max-width: 1000px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-top: 15px;
+}
+
+.config-buttons {
+  margin-top: 20px;
+  text-align: left;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background: #f1f1f1;
+  color: #333;
+  font-family: 'Tajawal', Arial, sans-serif;
+  direction: rtl;
+}
+
+/* تحسين العرض على الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .quiz-box {
+    padding: 20px;
+  }
+
+  .option {
+    padding: 12px 20px;
+    min-height: 160px;
+    max-height: 200px;
+  }
+
+  .option-content img {
+    max-height: 90%;
+  }
+
+  .question-image,
+  .reading-text-image {
+    max-height: 200px;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .options-row {
+    grid-template-columns: 1fr;
+  }
+
+  .counters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #timer {
+    order: 2;
+    margin: 10px 0;
+  }
+
+  .katex-display {
+    font-size: 0.9em;
+    overflow-x: scroll;
+  }
+}
+
+.display-box {
+  background-color: #f9f9f9;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+</style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <h1 id="quizTitle">مراجعة تفاعلية لمادة اللغة الإنجليزية – الفصل الدراسي الثالث محاكاة للأسئلةالمركزية للصف السادس المراجعة العلمية: الأستاذ/ ماجد سعيد المالكي والأستاذ/ أحمد عبدالعزيز الشهري</h1>
+            <p id="instructions">اختر الإجابة الصحيحة لكل سؤال قبل انتهاء الوقت</p>
+        </div>
+
+
+        <div class="settings-panel" id="settingsPanel" style="display: none;">
+            <div class="settings-title">إعدادات العرض</div>
+            <div class="settings-option">
+                <label for="numeralType">نوع الأرقام:</label>
+                <select id="numeralType" onchange="changeNumeralType()">
+                    <option value="arabic">أرقام عربية (1, 2, 3)</option>
+                    <option selected="" value="eastern">أرقام هندية شرق أوسطية (١, ٢, ٣)</option>
+                </select>
+            </div>
+            <div class="settings-option">
+                <button onclick="cleanEasternNumerals()" style="margin-top: 8px; background-color:#dc3545; color:white; padding: 5px 10px; border:none; border-radius:5px; cursor:pointer;">
+                    🧹 تنظيف الأرقام الهندية داخل الأسئلة
+                </button>
+            </div>
+            <div class="settings-option">
+                <label for="questionTime">وقت السؤال (بالثواني):</label>
+                <input id="questionTime" max="120" min="5" onchange="changeQuestionTime()" type="number" value="30">
+            </div>
+            <div class="settings-footer">
+                <button class="nav-btn" onclick="toggleSettingsPanel()">حفظ وإغلاق</button>
+            </div>
+        </div>
+        <div class="counters" id="countersBox" style="display: flex;">
+            <div id="questionCounter">السؤال 5 من 49</div>
+            <div id="timer">الوقت المتبقي: 16 ثانية</div>
+            <div id="scoreCounter">الدرجات: 0 من 49</div>
+        </div>
+        <div class="reading-text" id="readingText" style="display: block;"><div class="reading-text-content" style="font-size: 18px;">مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ</div></div>
+        <div class="quiz-box" style="display: block;">
+            <div class="question" id="question"><div class="question-content"><div class="question-text" style="font-size: 20px;">I. Reading Short Sentences:Choose the correct answer:</div></div></div>
+            <div class="options" id="options"><div class="option" data-original-index="0"><div class="option-content"><span class="option-text" style="font-size: 18px;">He stayed at home</span></div></div><div class="option" data-original-index="1"><div class="option-content"><span class="option-text" style="font-size: 18px;">He played computer games</span></div></div><div class="option" data-original-index="2"><div class="option-content"><span class="option-text" style="font-size: 18px;">He cleaned the room</span></div></div><div class="option" data-original-index="3"><div class="option-content"><span class="option-text" style="font-size: 18px;">He practiced on the trampoline</span></div></div></div>
+            <div class="controls">
+                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">السابق</button>
+                <button class="nav-btn pause-btn" id="pauseBtn" onclick="togglePause()">توقف</button>
+                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">التالي</button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="progress" style="width: 8.16327%;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="score-board" id="scoreBoard" style="display: none;">
+        <h2>نتيجتك النهائية: <span id="totalQuestions">٤٩</span>/<span id="finalScore">٠</span></h2>
+        <button class="restart-btn" onclick="restartQuiz()">إعادة المحاولة</button>
+    </div>
+    
+    <script>
+        const state = {
+            questions: [],
+            currentQuestion: 0,
+            score: 0,
+            timeLeft: 30,
+            questionTime: 30,
+            timerId: null,
+            isPaused: false,
+            answeredQuestions: [],
+            numeralType: 'eastern'
+        };
+        const quizConfig = {
+            title: 'كويز الثقافة العامة 🇸🇦',
+            instructions: 'اختر الإجابة الصحيحة لكل سؤال قبل انتهاء الوقت'
+        };
+        function init() {
+            if (state.questions.length === 0) {
+                document.getElementById('questionCounter').textContent = `السؤال ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(0)}`;
+                document.getElementById('timer').textContent = `الوقت المتبقي: ${convertToSelectedNumerals(state.timeLeft)} ثانية`;
+                document.getElementById('scoreCounter').textContent = `الدرجات: ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(0)}`;
+                return;
+            }
+            state.currentQuestion = 0;
+            state.score = 0;
+            state.timeLeft = state.questionTime;
+            state.answeredQuestions = new Array(state.questions.length).fill(false);
+            showQuestion();
+        }
+        function showQuestion() {
+            clearInterval(state.timerId);
+            state.timeLeft = state.questionTime;
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const readingTextElement = document.getElementById('readingText');
+            if (state.currentQuestion >= state.questions.length) {
+                showResult();
+                return;
+            }
+            const questionObj = state.questions[state.currentQuestion];
+            readingTextElement.innerHTML = '';
+            let readingTextContent = '';
+            let readingImageSrc = null;
+            if (questionObj.reading) {
+                readingTextContent = questionObj.reading.text || '';
+                readingImageSrc = questionObj.reading.image || null;
+            }
+            if (!readingTextContent && questionObj.readingText) {
+                if (typeof questionObj.readingText === "string") {
+                    readingTextContent = questionObj.readingText;
+                } else if (typeof questionObj.readingText === "object") {
+                    readingTextContent = questionObj.readingText.text || '';
+                    readingImageSrc = questionObj.readingText.image || null;
+                }
+            }
+            if (!readingTextContent && questionObj.paragraph) {
+                readingTextContent = questionObj.paragraph;
+            }
+            if (!readingImageSrc && questionObj.paragraphImage) {
+                readingImageSrc = questionObj.paragraphImage;
+            }
+            if (readingTextContent || readingImageSrc) {
+                readingTextElement.style.display = 'block';
+                if (readingTextContent) {
+                    const textElement = document.createElement('div');
+                    textElement.className = 'reading-text-content';
+                    textElement.innerHTML = convertTextNumerals(readingTextContent).replaceAll('//', '<br>');
+                    readingTextElement.appendChild(textElement);
+                }
+                if (readingImageSrc) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = readingImageSrc;
+                    imgElement.className = 'reading-text-image';
+                    imgElement.alt = 'صورة النص القرائي';
+                    readingTextElement.appendChild(imgElement);
+                }
+            } else {
+                readingTextElement.style.display = 'none';
+            }
+            questionElement.innerHTML = '';
+            const questionContent = document.createElement('div');
+            questionContent.className = 'question-content';
+            if (questionObj.question.text) {
+                const textElement = document.createElement('div');
+                textElement.className = 'question-text';
+                textElement.innerHTML = convertTextNumerals(questionObj.question.text).replaceAll('//', '<br>');
+                questionContent.appendChild(textElement);
+            }
+            if (questionObj.question.image) {
+                const imgElement = document.createElement('img');
+                imgElement.src = questionObj.question.image;
+                imgElement.className = 'question-image';
+                questionContent.appendChild(imgElement);
+            }
+            questionElement.appendChild(questionContent);
+            optionsElement.innerHTML = '';
+            if (!questionObj.options || questionObj.options.length === 0) {
+                console.error("لا توجد خيارات متاحة لهذا السؤال!");
+                return;
+            }
+            const validOptions = [];
+            const optionIndices = [];
+            questionObj.options.forEach((option, index) => {
+                if (!option || (!option.text && !option.image)) return;
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.dataset.originalIndex = index;
+                const optionContent = document.createElement('div');
+                optionContent.className = 'option-content';
+                if (option.image) {
+                    const img = document.createElement('img');
+                    img.src = option.image;
+                    img.className = 'option-image';
+                    optionContent.appendChild(img);
+                }
+                if (option.text) {
+                    const text = document.createElement('span');
+                    text.className = 'option-text';
+                    text.innerHTML = convertTextNumerals(option.text).replaceAll('//', '<br>');
+                    optionContent.appendChild(text);
+                }
+                optionElement.appendChild(optionContent);
+                validOptions.push(optionElement);
+                optionIndices.push(index);
+            });
+            if (validOptions.length <= 3) {
+                optionsElement.classList.add('options-row');
+            } else {
+                optionsElement.classList.remove('options-row');
+            }
+            validOptions.forEach((optionElement, i) => {
+                const originalIndex = optionIndices[i];
+                if (state.answeredQuestions[state.currentQuestion]) {
+                    optionElement.style.pointerEvents = 'none';
+                    if (originalIndex === questionObj.correct) {
+                        optionElement.classList.add('correct');
+                    }
+                }
+                optionElement.onclick = () => checkAnswer(originalIndex);
+                optionsElement.appendChild(optionElement);
+            });
+            document.getElementById('prevBtn').disabled = state.currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('progress').style.width = `${(state.currentQuestion / state.questions.length) * 100}%`;
+            updateFontSizes();
+            updateQuestionCounter();
+            updateScoreCounter();
+            startTimer();
+        }
+        function startTimer() {
+            state.timerId = setInterval(() => {
+                if (!state.isPaused) {
+                    state.timeLeft--;
+                    updateTimerDisplay();
+                    if (state.timeLeft <= 0) {
+                        clearInterval(state.timerId);
+                        nextQuestion();
+                    }
+                }
+            }, 1000);
+        }
+        function updateTimerDisplay() {
+            document.getElementById('timer').textContent = `الوقت المتبقي: ${convertToSelectedNumerals(state.timeLeft)} ثانية`;
+        }
+        function checkAnswer(selectedIndex) {
+            const options = document.querySelectorAll('.option');
+            const correctIndex = state.questions[state.currentQuestion].correct;
+            if (state.answeredQuestions[state.currentQuestion]) return;
+            options.forEach(option => option.style.pointerEvents = 'none');
+            options[correctIndex].classList.add('correct');
+            if (selectedIndex === correctIndex) {
+                state.score++;
+                state.answeredQuestions[state.currentQuestion] = true;
+                updateScoreCounter();
+            } else {
+                options[selectedIndex].classList.add('wrong');
+            }
+            if (state.currentQuestion < state.questions.length - 1) {
+                setTimeout(nextQuestion, 1500);
+            } else {
+                setTimeout(showResult, 1500);
+            }
+        }
+        function nextQuestion() {
+            if (state.currentQuestion >= state.questions.length - 1) {
+                showResult();
+                return;
+            }
+            state.currentQuestion++;
+            showQuestion();
+        }
+        function previousQuestion() {
+            if (state.currentQuestion > 0) {
+                state.currentQuestion--;
+                showQuestion();
+            }
+        }
+        function showResult() {
+            clearInterval(state.timerId);
+            document.querySelector('.quiz-box').style.display = 'none';
+            document.getElementById('scoreBoard').style.display = 'block';
+            document.querySelector('.buttons-container').style.display = 'none';
+            document.getElementById('readingText').style.display = 'none';
+            document.getElementById('countersBox').style.display = 'none';
+            document.getElementById('finalScore').textContent = convertToSelectedNumerals(state.score);
+            document.getElementById('totalQuestions').textContent = convertToSelectedNumerals(state.questions.length);
+        }
+        function restartQuiz() {
+            state.currentQuestion = 0;
+            state.score = 0;
+            state.timeLeft = state.questionTime;
+            state.answeredQuestions.fill(false);
+            document.querySelector('.quiz-box').style.display = 'block';
+            document.getElementById('scoreBoard').style.display = 'none';
+            document.querySelector('.buttons-container').style.display = 'flex';
+            document.getElementById('countersBox').style.display = 'flex';
+            document.getElementById('progress').style.width = '0%';
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('correct', 'wrong');
+                option.style.pointerEvents = 'auto';
+            });
+            showQuestion();
+        }
+        function togglePause() {
+            state.isPaused = !state.isPaused;
+            const btn = document.getElementById('pauseBtn');
+            btn.textContent = state.isPaused ? 'استئناف' : 'توقف';
+            btn.style.background = state.isPaused ? '#28a745' : '#ffc107';
+        }
+        function toggleSettingsPanel() {
+            const panel = document.getElementById('settingsPanel');
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+        function toggleConfigPanel() {
+            const panel = document.getElementById('configPanel');
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                panel.style.display = 'block';
+                document.getElementById('titleInput').value = quizConfig.title;
+                document.getElementById('instructionsInput').value = quizConfig.instructions;
+            }
+        }
+        function saveConfig() {
+            const newTitle = document.getElementById('titleInput').value;
+            const newInstructions = document.getElementById('instructionsInput').value;
+            const newFooter = document.getElementById('footerInput').value;
+            if (newTitle) {
+                quizConfig.title = newTitle;
+                document.getElementById('quizTitle').textContent = newTitle;
+            }
+            if (newInstructions) {
+                quizConfig.instructions = newInstructions;
+                document.getElementById('instructions').textContent = newInstructions;
+            }
+            if (newFooter) {
+                document.getElementById('quizFooter').textContent = newFooter;
+            }
+            toggleConfigPanel();
+        }
+        function convertToSelectedNumerals(num) {
+            if (num === undefined || num === null) return state.numeralType === 'eastern' ? "٠" : "0";
+            if (state.numeralType === 'eastern') {
+                const easternArabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+                return num.toString().replace(/\d/g, digit => easternArabicNumerals[digit]);
+            }
+            return num.toString();
+        }
+        function convertTextNumerals(text) {
+            if (!text || typeof text !== 'string') return text;
+            const easternArabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return text.replace(/\d/g, digit => state.numeralType === 'eastern' ? easternArabicNumerals[digit] : digit);
+        }
+        function changeNumeralType() {
+            state.numeralType = document.getElementById('numeralType').value;
+            updateQuestionCounter();
+            updateScoreCounter();
+            updateTimerDisplay();
+            showQuestion();
+        }
+        function changeQuestionTime() {
+            const questionTime = parseInt(document.getElementById('questionTime').value);
+            if (questionTime >= 5 && questionTime <= 120) {
+                state.questionTime = questionTime;
+                state.timeLeft = questionTime;
+                updateTimerDisplay();
+            }
+        }
+        function updateQuestionCounter() {
+            document.getElementById('questionCounter').textContent = 
+                `السؤال ${convertToSelectedNumerals(state.currentQuestion + 1)} من ${convertToSelectedNumerals(state.questions.length)}`;
+        }
+        function updateScoreCounter() {
+            document.getElementById('scoreCounter').textContent = 
+                `الدرجات: ${convertToSelectedNumerals(state.score)} من ${convertToSelectedNumerals(state.questions.length)}`;
+        }
+        function loadQuestionsFromFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const loadedQuestions = JSON.parse(e.target.result);
+                            state.questions = loadedQuestions;
+                            init();
+                        } catch (error) {
+                            alert("حدث خطأ في تحميل ملف الأسئلة. تأكد من أن الملف بصيغة JSON صحيحة.");
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        function saveQuestionsToFile() {
+            if (!state.questions || state.questions.length === 0) {
+                alert("لا توجد أسئلة لحفظها!");
+                return;
+            }
+            const dataStr = JSON.stringify(state.questions, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', 'quiz_questions.json');
+            linkElement.click();
+        }
+                /**
+         * حفظ التطبيق كنسخة طالب للاستخدام المحلي
+         * تعتمد على إعدادات العرض الحالية (نوع الأرقام)
+         */
+        function saveAppForOfflineUse() {
+            try {
+                // إنشاء نسخة من محتوى HTML الحالي
+                const htmlContent = document.documentElement.outerHTML;
+
+                // إنشاء مستند جديد لمعالجة المحتوى
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlContent, 'text/html');
+
+                // تغيير العنوان ليعكس أنها نسخة الطالب
+                const numeralTypeText = state.numeralType === 'eastern' ? 'أرقام هندية شرق أوسطية' : 'أرقام عربية';
+                const titleElement = doc.querySelector('title');
+                if (titleElement) {
+                    titleElement.textContent = `اختبارات تفاعلية تعليمية - نسخة الطالب (${numeralTypeText})`;
+                }
+
+                // إزالة زر لوحة التحكم
+                const configBtn = doc.querySelector('.config-btn');
+                if (configBtn) {
+                    configBtn.remove();
+                }
+
+                // إزالة منطقة الأزرار الإدارية
+                const buttonsContainer = doc.querySelector('.buttons-container');
+                if (buttonsContainer) {
+                    buttonsContainer.remove();
+                }
+
+                // إزالة لوحة الإعدادات
+                const settingsPanel = doc.querySelector('.settings-panel');
+                if (settingsPanel) {
+                    settingsPanel.remove();
+                }
+
+                // إزالة لوحة التحكم
+                const configPanel = doc.querySelector('.config-panel');
+                if (configPanel) {
+                    configPanel.remove();
+                }
+
+                const fontControlPanel = doc.querySelector('#fontControlPanel');
+                if (fontControlPanel) {
+                    fontControlPanel.remove();
+               }
+
+                // تعديل وظيفة window.onload
+                const scripts = doc.querySelectorAll('script');
+                let lastScript = scripts[scripts.length - 1];
+
+                if (lastScript) {
+                    // تحويل الأسئلة الحالية إلى نص JSON
+                    const currentQuestionsJSON = JSON.stringify(state.questions);
+
+                    // استبدال وظيفة window.onload بوظيفة مبسطة للطالب
+                    const studentOnloadFunction = `
+// إضافة الأسئلة المخصصة مباشرة
+const customQuestions = ${currentQuestionsJSON};
+state.numeralType = "${state.numeralType}"; // حفظ إعداد نوع الأرقام
+// تهيئة التطبيق عند تحميل الصفحة
+`;
+
+                    // إنشاء عنصر script جديد للطالب
+                    const studentScript = doc.createElement('script');
+                    studentScript.textContent = studentOnloadFunction;
+
+                    // إضافة السكريبت الجديد بعد آخر سكريبت
+                    lastScript.parentNode.insertBefore(studentScript, lastScript.nextSibling);
+
+                    // حذف وظيفة window.onload الأصلية من السكريبت الأخير
+                    const originalScriptContent = lastScript.textContent;
+                    const modifiedScriptContent = originalScriptContent.replace(/window\.onload\s*=\s*function\s*\(\)\s*\{[\s\S]*?\};/, '');
+                    lastScript.textContent = modifiedScriptContent;
+                }
+
+                // الحصول على HTML المعدل
+                const modifiedHTML = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+
+                // إنشاء رابط لتنزيل نسخة الطالب
+                const blob = new Blob([modifiedHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+
+                const numeralTypeSuffix = state.numeralType === 'eastern' ? 'eastern' : 'arabic';
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `quiz_app_student_${numeralTypeSuffix}.html`;
+                a.click();
+
+                // تحرير الموارد
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (error) {
+                console.error('خطأ في حفظ التطبيق:', error);
+                alert('حدث خطأ أثناء حفظ التطبيق. يرجى المحاولة مرة أخرى.');
+            }
+        }
+
+        // إضافة الأزرار الإدارية عند تحميل الصفحة
+        window.onload = function () {
+            // إخفاء النص القرائي عند فتح الصفحة
+            const readingText = document.getElementById('readingText');
+            if (readingText) {
+                readingText.style.display = 'none';
+            }
+
+            // تعديل زر تحميل الأسئلة الموجود
+            const loadButton = document.getElementById('loadButton');
+            if (loadButton) {
+                loadButton.onclick = loadQuestionsFromFile;
+            }
+
+            // إضافة الأزرار الإضافية إلى منطقة الأزرار
+            const buttonsContainer = document.querySelector('.buttons-container');
+
+            // زر حفظ الأسئلة
+            const saveQuestionsButton = document.createElement('button');
+            saveQuestionsButton.id = 'saveQuestionsButton';
+            saveQuestionsButton.textContent = 'حفظ الأسئلة';
+            saveQuestionsButton.className = 'action-btn';
+            saveQuestionsButton.onclick = saveQuestionsToFile;
+            buttonsContainer.appendChild(saveQuestionsButton);
+
+            // زر حفظ التطبيق للاستخدام المحلي
+            const saveAppButton = document.createElement('button');
+            saveAppButton.id = 'saveAppButton';
+            saveAppButton.textContent = 'حفظ التطبيق';
+            saveAppButton.className = 'action-btn';
+            saveAppButton.style.backgroundColor = '#6c757d';
+            saveAppButton.onclick = saveAppForOfflineUse;
+            buttonsContainer.appendChild(saveAppButton);
+
+            // تحديث العدادات الأولية
+            document.getElementById('questionCounter').innerHTML = `السؤال ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(0)}`;
+            document.getElementById('timer').innerHTML = `الوقت المتبقي: ${convertToSelectedNumerals(state.timeLeft)} ثانية`;
+            document.getElementById('scoreCounter').innerHTML = `الدرجات: ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(0)}`;
+
+            // تحديث عنوان الكويز
+            document.getElementById('quizTitle').textContent = quizConfig.title;
+
+            // تحديث قيم الإعدادات
+            document.getElementById('numeralType').value = state.numeralType;
+            document.getElementById('questionTime').value = state.questionTime;
+
+            // بدء الاختبار
+            init();
+        };
+        
+        function cleanEasternNumerals() {
+            if (!state.questions || !Array.isArray(state.questions)) return;
+            const easternArabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            function convertEasternToArabic(text) {
+                if (!text || typeof text !== 'string') return text;
+                return text.replace(/[٠-٩]/g, d => easternArabic.indexOf(d));
+            }
+            state.questions.forEach(q => {
+                if (q.question && q.question.text) q.question.text = convertEasternToArabic(q.question.text);
+                if (q.reading && q.reading.text) q.reading.text = convertEasternToArabic(q.reading.text);
+                if (q.readingText && typeof q.readingText === "object" && q.readingText.text) q.readingText.text = convertEasternToArabic(q.readingText.text);
+                if (q.options && Array.isArray(q.options)) q.options.forEach(opt => { if (opt.text) opt.text = convertEasternToArabic(opt.text); });
+            });
+            alert("✅ تم تنظيف الأرقام الهندية بنجاح!");
+            showQuestion();
+        }
+
+        function updateFontSizes() {
+  const readingSize = document.getElementById("readingFontSize").value + "px";
+  const questionSize = document.getElementById("questionFontSize").value + "px";
+  const optionSize = document.getElementById("optionFontSize").value + "px";
+
+  // النص القرائي
+  document.querySelectorAll('.reading-text-content').forEach(el => {
+    el.style.fontSize = readingSize;
+  });
+
+  // نص السؤال
+  document.querySelectorAll('.question-text').forEach(el => {
+    el.style.fontSize = questionSize;
+  });
+
+  // نص الخيارات
+  document.querySelectorAll('.option-text').forEach(el => {
+    el.style.fontSize = optionSize;
+  });
+}
+
+// تفعيل/إلغاء وضع التحرير
+function toggleEditMode() {
+    const editPanel = document.getElementById('editPanel');
+    const quizBox = document.querySelector('.quiz-box');
+    const countersBox = document.getElementById('countersBox');
+    const readingText = document.getElementById('readingText');
+    
+    if (editPanel.style.display === 'block') {
+        editPanel.style.display = 'none';
+        quizBox.style.display = 'block';
+        countersBox.style.display = 'flex';
+        readingText.style.display = state.questions[state.currentQuestion] && 
+            (state.questions[state.currentQuestion].reading || state.questions[state.currentQuestion].readingText || state.questions[state.currentQuestion].paragraph) 
+            ? 'block' : 'none';
+        startTimer();
+    } else {
+        if (state.questions.length === 0) {
+            alert('يرجى تحميل الأسئلة أولاً!');
+            return;
+        }
+        editPanel.style.display = 'block';
+        quizBox.style.display = 'none';
+        countersBox.style.display = 'none';
+        readingText.style.display = 'none';
+        clearInterval(state.timerId);
+        populateEditForm();
+    }
+}
+
+// ملء نموذج التحرير ببيانات السؤال الحالي
+function populateEditForm() {
+    const questionObj = state.questions[state.currentQuestion];
+    if (!questionObj) return;
+
+    // النص القرائي
+    let readingText = '';
+    let readingImage = null;
+    if (questionObj.reading) {
+        readingText = questionObj.reading.text || '';
+        readingImage = questionObj.reading.image || null;
+    } else if (questionObj.readingText) {
+        readingText = typeof questionObj.readingText === 'string' ? questionObj.readingText : questionObj.readingText.text || '';
+        readingImage = typeof questionObj.readingText === 'object' ? questionObj.readingText.image || null : null;
+    } else if (questionObj.paragraph) {
+        readingText = questionObj.paragraph || '';
+        readingImage = questionObj.paragraphImage || null;
+    }
+    document.getElementById('editReadingText').value = readingText;
+    document.getElementById('readingImagePreview').src = readingImage || '';
+    document.getElementById('readingImagePreview').style.display = readingImage ? 'block' : 'none';
+
+    // السؤال
+    document.getElementById('editQuestionText').value = questionObj.question.text || '';
+    document.getElementById('questionImagePreview').src = questionObj.question.image || '';
+    document.getElementById('questionImagePreview').style.display = questionObj.question.image ? 'block' : 'none';
+
+    // الخيارات
+    for (let i = 0; i < 4; i++) {
+        const option = questionObj.options[i] || { text: '', image: null };
+        document.getElementById(`editOption${i + 1}`).value = option.text || '';
+        document.getElementById(`optionImagePreview${i + 1}`).src = option.image || '';
+        document.getElementById(`optionImagePreview${i + 1}`).style.display = option.image ? 'block' : 'none';
+        document.getElementById(`correct${i + 1}`).checked = (i === questionObj.correct);
+    }
+}
+
+// معالجة تحميل الصور
+function handleImageUpload(input, previewId, callback) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById(previewId).src = e.target.result;
+            document.getElementById(previewId).style.display = 'block';
+            callback(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+// ربط حقول الصور
+document.getElementById('editReadingImage').addEventListener('change', function() {
+    handleImageUpload(this, 'readingImagePreview', function(base64) {
+        const questionObj = state.questions[state.currentQuestion];
+        if (questionObj.reading) {
+            questionObj.reading.image = base64;
+        } else if (questionObj.readingText && typeof questionObj.readingText === 'object') {
+            questionObj.readingText.image = base64;
+        } else {
+            questionObj.paragraphImage = base64;
+        }
+    });
+});
+
+document.getElementById('editQuestionImage').addEventListener('change', function() {
+    handleImageUpload(this, 'questionImagePreview', function(base64) {
+        state.questions[state.currentQuestion].question.image = base64;
+    });
+});
+
+for (let i = 1; i <= 4; i++) {
+    document.getElementById(`editOptionImage${i}`).addEventListener('change', function() {
+        handleImageUpload(this, `optionImagePreview${i}`, function(base64) {
+            const questionObj = state.questions[state.currentQuestion];
+            if (!questionObj.options[i - 1]) {
+                questionObj.options[i - 1] = { text: '', image: null };
+            }
+            questionObj.options[i - 1].image = base64;
+        });
+    });
+
+    document.getElementById(`correct${i}`).addEventListener('change', function() {
+        if (this.checked) {
+            for (let j = 1; j <= 4; j++) {
+                document.getElementById(`correct${j}`).checked = (j === i);
+            }
+            state.questions[state.currentQuestion].correct = i - 1;
+        }
+    });
+}
+
+// حفظ التعديلات
+function saveEdit() {
+    const questionText = document.getElementById('editQuestionText').value.trim();
+    const options = [
+        document.getElementById('editOption1').value.trim(),
+        document.getElementById('editOption2').value.trim(),
+        document.getElementById('editOption3').value.trim(),
+        document.getElementById('editOption4').value.trim()
+    ];
+    const nonEmptyOptions = options.filter(opt => opt !== '').length;
+    const correctCheckedIndex = Array.from({length: 4}, (_, i) => 
+        document.getElementById(`correct${i + 1}`).checked ? i : -1).filter(i => i >= 0)[0];
+
+    // التحقق من البيانات
+    if (!questionText) {
+        alert('يرجى إدخال نص السؤال!');
+        return;
+    }
+    
+    const questionObj = state.questions[state.currentQuestion];
+    const readingText = document.getElementById('editReadingText').value.trim();
+
+    // تحديث النص القرائي
+    if (questionObj.reading) {
+        questionObj.reading.text = readingText;
+    } else if (questionObj.readingText) {
+        if (typeof questionObj.readingText === 'string') {
+            questionObj.readingText = readingText;
+        } else {
+            questionObj.readingText.text = readingText;
+        }
+    } else {
+        questionObj.paragraph = readingText;
+    }
+
+    // تحديث السؤال
+    questionObj.question.text = questionText;
+
+    // تحديث الخيارات
+    for (let i = 0; i < 4; i++) {
+        if (!questionObj.options[i]) {
+            questionObj.options[i] = { text: '', image: null };
+        }
+        questionObj.options[i].text = options[i] || '';
+    }
+    questionObj.correct = correctCheckedIndex;
+
+    // إغلاق النموذج وتحديث العرض
+    document.getElementById('editPanel').style.display = 'none';
+    document.querySelector('.quiz-box').style.display = 'block';
+    document.getElementById('countersBox').style.display = 'flex';
+    document.getElementById('readingText').style.display = readingText || questionObj.paragraphImage ? 'block' : 'none';
+    showQuestion();
+}
+
+// إلغاء التحرير
+function cancelEdit() {
+    document.getElementById('editPanel').style.display = 'none';
+    document.querySelector('.quiz-box').style.display = 'block';
+    document.getElementById('countersBox').style.display = 'flex';
+    document.getElementById('readingText').style.display = state.questions[state.currentQuestion] && 
+        (state.questions[state.currentQuestion].reading || state.questions[state.currentQuestion].readingText || state.questions[state.currentQuestion].paragraph) 
+        ? 'block' : 'none';
+    showQuestion();
+}
+
+// إضافة سؤال جديد
+function addNewQuestion() {
+    const newQuestion = {
+        reading: { text: '', image: null },
+        question: { text: '', image: null },
+        options: [
+            { text: '', image: null },
+            { text: '', image: null },
+            { text: '', image: null },
+            { text: '', image: null }
+        ],
+        correct: 0
+    };
+    state.questions.push(newQuestion);
+    state.currentQuestion = state.questions.length - 1;
+    state.answeredQuestions.push(false);
+    document.getElementById('editPanel').style.display = 'none';
+    document.querySelector('.quiz-box').style.display = 'block';
+    document.getElementById('countersBox').style.display = 'flex';
+    showQuestion();
+}
+
+// حذف السؤال الحالي
+function deleteCurrentQuestion() {
+    if (state.questions.length <= 1) {
+        alert('لا يمكن حذف السؤال الوحيد!');
+        return;
+    }
+    if (confirm('هل أنت متأكد من حذف السؤال الحالي؟')) {
+        state.questions.splice(state.currentQuestion, 1);
+        state.answeredQuestions.splice(state.currentQuestion, 1);
+        if (state.currentQuestion >= state.questions.length) {
+            state.currentQuestion = state.questions.length - 1;
+        }
+        document.getElementById('editPanel').style.display = 'none';
+        document.querySelector('.quiz-box').style.display = 'block';
+        document.getElementById('countersBox').style.display = 'flex';
+        document.getElementById('readingText').style.display = state.questions[state.currentQuestion] && 
+            (state.questions[state.currentQuestion].reading || state.questions[state.currentQuestion].readingText || state.questions[state.currentQuestion].paragraph) 
+            ? 'block' : 'none';
+        showQuestion();
+    }
+}
+    </script><script>
+// إضافة الأسئلة المخصصة مباشرة
+const customQuestions = [{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي // شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"It is a school bus","image":null},{"text":"It is a taxi","image":null},{"text":"It is a train","image":null},{"text":"It is a car","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"She had a cat","image":null},{"text":"She had a bag","image":null},{"text":"She had a lamb","image":null},{"text":"She had a rabbit","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"I have a stomachache","image":null},{"text":"I have a headache","image":null},{"text":"I have an earache","image":null},{"text":"I have a sore throat","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"It is a post office","image":null},{"text":"It is a convenience store","image":null},{"text":"It is a police station","image":null},{"text":"It is a supermarket","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"He stayed at home","image":null},{"text":"He played computer games","image":null},{"text":"He cleaned the room","image":null},{"text":"He practiced on the trampoline","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"a. There is a (Don’t Litter sign) here.","image":null},{"text":"They have to put a (Stop) sign","image":null},{"text":"There is a (No Smoking) sign in the hotel","image":null},{"text":"There is a (No Parking) sign in the street.","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences:Choose the correct answer:","image":null},"options":[{"text":"He likes golf","image":null},{"text":"He likes tennis","image":null},{"text":"He likes diving","image":null},{"text":"He likes football","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"I. Reading Short Sentences://Choose the correct answer:","image":null},"options":[{"text":"I'd like to play volleyball","image":null},{"text":"I'd like some juice","image":null},{"text":"I’d like some bread","image":null},{"text":"I'd like to thank you","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Last week, we …………….to Najran.","image":null},"options":[{"text":"go","image":null},{"text":"went","image":null},{"text":"goes","image":null},{"text":"are going","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// You should ……………. a lot of water.","image":null},"options":[{"text":"drink","image":null},{"text":"drinks","image":null},{"text":"drank","image":null},{"text":"are drinking","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://……………. students are there in your school?","image":null},"options":[{"text":"How much","image":null},{"text":"How long","image":null},{"text":"How many","image":null},{"text":"How old","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Last year, I ……………. History.","image":null},"options":[{"text":"have liked","image":null},{"text":"like","image":null},{"text":"likes","image":null},{"text":"liked","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// There ……………. flowers in the garden now.","image":null},"options":[{"text":"am","image":null},{"text":"are","image":null},{"text":"is","image":null},{"text":"were","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// I didn’t ……………. dinner this evening.","image":null},"options":[{"text":"eat","image":null},{"text":"ate","image":null},{"text":"eats","image":null},{"text":"am eating","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// ……………. you have lunch at your school every day?","image":null},"options":[{"text":"Did","image":null},{"text":"Do","image":null},{"text":"Does","image":null},{"text":"Doesn’t","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// There ……………. a book on the table yesterday.","image":null},"options":[{"text":"was","image":null},{"text":"are","image":null},{"text":"is","image":null},{"text":"were","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer:// We are going to ……………. Abha in Asir.","image":null},"options":[{"text":"visits","image":null},{"text":"visit","image":null},{"text":"visited","image":null},{"text":"is visiting","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"II. Grammar://Choose the correct answer://Why did she eat all the soup? ………..…. she was hungry.","image":null},"options":[{"text":"Or","image":null},{"text":"And","image":null},{"text":"But","image":null},{"text":"Because","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://This is a ………..….","image":null},"options":[{"text":"cell phone","image":null},{"text":"TV","image":null},{"text":"computer","image":null},{"text":"house","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://Riyadh is a ………..…. n Saudi Arabia.","image":null},"options":[{"text":"country","image":null},{"text":"continent","image":null},{"text":"city","image":null},{"text":"house","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://Don’t ………..…. Speak clearly.","image":null},"options":[{"text":"draw","image":null},{"text":"shout","image":null},{"text":"write","image":null},{"text":"skip","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://He is wearing jeans and a ………...…...","image":null},"options":[{"text":"cap","image":null},{"text":"belt","image":null},{"text":"T-shirt","image":null},{"text":"jacket","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer:// She is good at ………...…...","image":null},"options":[{"text":"Math","image":null},{"text":"Social Studies","image":null},{"text":"PE","image":null},{"text":"Science","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://The ………...…... is far from here.","image":null},"options":[{"text":"coffee shop","image":null},{"text":"butcher","image":null},{"text":"train station","image":null},{"text":"bus stop","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://A ………...…... is a store to sell pens and pencils.","image":null},"options":[{"text":"DVD store","image":null},{"text":"candy store","image":null},{"text":"flower store","image":null},{"text":"stationary","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://A teacher works at a……………...…...","image":null},"options":[{"text":"school","image":null},{"text":"bank","image":null},{"text":"mall","image":null},{"text":"hospital","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://I'm starting to get a ……………...…...","image":null},"options":[{"text":"toothache","image":null},{"text":"headache","image":null},{"text":"cold","image":null},{"text":"fever","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://August is a ……………...…...","image":null},"options":[{"text":"year","image":null},{"text":"season","image":null},{"text":"month","image":null},{"text":"day","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://You must come early to class.//The opposite of early is ……………...…...","image":null},"options":[{"text":"late","image":null},{"text":"wealthy","image":null},{"text":"right","image":null},{"text":"happy","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"III. Vocabulary://Choose the correct answer://The laptop has a big screen.//The opposite of big is ……………...…...","image":null},"options":[{"text":"strong","image":null},{"text":"small","image":null},{"text":"up","image":null},{"text":"right","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://I want a st_pler.","image":null},"options":[{"text":"( i )","image":null},{"text":"( o )","image":null},{"text":"( u )","image":null},{"text":"( a )","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://It is a _ _arf.","image":null},"options":[{"text":"( sq )","image":null},{"text":"( sk )","image":null},{"text":"( sc )","image":null},{"text":"( sn )","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://It is a _ _arf.","image":null},"options":[{"text":"( ai )","image":null},{"text":"( ue )","image":null},{"text":"( ea )","image":null},{"text":"( oy )","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://He goes rock cl_mbing.","image":null},"options":[{"text":"( e )","image":null},{"text":"( a )","image":null},{"text":"( i )","image":null},{"text":"( o )","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://I saw a bi_d.","image":null},"options":[{"text":"( r )","image":null},{"text":"( m )","image":null},{"text":"( h )","image":null},{"text":"( v )","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://The b _ _ ger is delicious.","image":null},"options":[{"text":"( ow )","image":null},{"text":"( ur )","image":null},{"text":"( ar )","image":null},{"text":"( er )","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter://The g_obe is round.","image":null},"options":[{"text":"( l )","image":null},{"text":"( k )","image":null},{"text":"( r )","image":null},{"text":"( f )","image":null}],"correct":0},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"IV. Orthography://Choose the correct letter:// I have a d_ll.","image":null},"options":[{"text":"( u )","image":null},{"text":"( i )","image":null},{"text":"( a )","image":null},{"text":"(o )","image":null}],"correct":3},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Who works in a hospital","image":null},"options":[{"text":"A student","image":null},{"text":"A doctor","image":null},{"text":"A baker","image":null},{"text":"An engineer","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Where is Burj Khalifa","image":null},"options":[{"text":"In Egypt","image":null},{"text":"In Saudi Arabia","image":null},{"text":"In Dubai","image":null},{"text":"In London","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What can we buy from a bakery","image":null},"options":[{"text":"Milk","image":null},{"text":"Rice","image":null},{"text":"Bread","image":null},{"text":"Books","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What is the first day of the week","image":null},"options":[{"text":"Friday","image":null},{"text":"Saturday","image":null},{"text":"Sunday Monday","image":null},{"text":"Monday","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //When do people eat breakfast","image":null},"options":[{"text":"At night","image":null},{"text":"In the morning","image":null},{"text":"In the afternoon","image":null},{"text":"Before dinner","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //What do students do in a library","image":null},"options":[{"text":"They sleep","image":null},{"text":"They read books","image":null},{"text":"They buy food","image":null},{"text":"They watch TV","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //How much is the sweater","image":null},"options":[{"text":"It is 30 SAR","image":null},{"text":"It is 40 SAR","image":null},{"text":"It is 50 SAR","image":null},{"text":"It is 60 SAR","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Choose the correct answer: //Is she a girl","image":null},"options":[{"text":"No, she isn't","image":null},{"text":"Yes, he is","image":null},{"text":"Yes, she is","image":null},{"text":"No, he isn't","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//make / my / bed","image":null},"options":[{"text":"Mybed //make i//","image":null},{"text":"Make iMy//bed //","image":null},{"text":"I bedMy//make//","image":null},{"text":"MakeI My//bed //","image":null}],"correct":1},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//children / The / games / played","image":null},"options":[{"text":"Games the //children //played//","image":null},{"text":"The played//Games //children //","image":null},{"text":"the children //played//Games //","image":null},{"text":"playedthe //children //Games //","image":null}],"correct":2},{"reading":{"text":"مراجعة تفاعلية للاستعداد للاختبارات المركزية في مادة اللغة الانجليزية للصف السادس الابتدائي – شاملة لدروس ومهارات الفصل الدراسي الثالث للعام الدراسي 1446هـ","image":null},"question":{"text":"Rearrange the following words to form meaningful sentences//uniform / a / wears / Faisal","image":null},"options":[{"text":"Wears Faisal //a//uniform //","image":null},{"text":"Faisal Wears//a//uniform//","image":null},{"text":"a uniform//Wears//Faisal//","image":null},{"text":"uniform Wears//Faisal//a//","image":null}],"correct":1}];
+state.numeralType = "arabic"; // حفظ إعداد نوع الأرقام
+// تهيئة التطبيق عند تحميل الصفحة
+window.onload = function() {
+    // إخفاء النص القرائي عند فتح الصفحة
+    const readingText = document.getElementById('readingText');
+    if (readingText) {
+        readingText.style.display = 'none';
+    }
+    
+    // تعيين الأسئلة المخصصة
+    state.questions = customQuestions;
+    
+    // تحديث العدادات الأولية
+    document.getElementById('questionCounter').innerHTML = `السؤال ${convertToSelectedNumerals(1)} من ${convertToSelectedNumerals(state.questions.length)}`;
+    document.getElementById('timer').innerHTML = `الوقت المتبقي: ${convertToSelectedNumerals(state.timeLeft)} ثانية`;
+    document.getElementById('scoreCounter').innerHTML = `الدرجات: ${convertToSelectedNumerals(0)} من ${convertToSelectedNumerals(state.questions.length)}`;
+    
+    // بدء الاختبار مباشرة
+    init();
+};</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W33PZW3VJV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W33PZW3VJV');
+</script>
+
+    <footer id="quizFooter">إعداد وتصميم: معلم المهارات الرقمية| عبدالله بن رشيد الدريبي مدرسة غرناطة الابتدائية - العام الدراسي 1446هـ ، للتواصل: https://x.com/AbuRasheed12 ، t237265@rb.moe.gov.sa            </footer>
+    
+</body></html>
